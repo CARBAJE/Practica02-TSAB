@@ -112,7 +112,7 @@ El proceso evolutivo se estructura en ciclos o generaciones.
 
 \section{Penalización Exterior}
 
-Los métodos de penalización son técnicas para manejar restricciones en problemas de optimización. La idea principal es transformar un problema de optimización con restricciones en uno sin restricciones, modificando la función objetivo para penalizar las soluciones que no cumplen con las restricciones. En el método de penalización exterior, esto se logra agregando términos a la función objetivo que aumentan su valor cuando se violan las restricciones. [cite: 45, 46, 47, 48, 49, 50, 51]
+Los métodos de penalización son técnicas para manejar restricciones en problemas de optimización. La idea principal es transformar un problema de optimización con restricciones en uno sin restricciones, modificando la función objetivo para penalizar las soluciones que no cumplen con las restricciones. En el método de penalización exterior, esto se logra agregando términos a la función objetivo que aumentan su valor cuando se violan las restricciones.
 
 La función objetivo modificada, denotada como \( F_P(x) \), se define como:
 
@@ -166,7 +166,7 @@ Donde:
 \subsection*{Desventajas}
 
 \begin{itemize}
-    \item \textbf{Distorsión de la solución óptima:} La penalización puede llevar a soluciones subóptimas si se priorizan soluciones que violan las restricciones pero tienen un mejor valor de la función objetivo. [cite: 61, 62]
-    \item \textbf{Sensibilidad al parámetro de penalización:} La elección del valor de \( \lambda_P \) es crucial. Si es muy pequeño, las restricciones pueden no cumplirse; si es muy grande, puede dificultar la convergencia. [cite: 63, 64, 65]
+    \item \textbf{Distorsión de la solución óptima:} La penalización puede llevar a soluciones subóptimas si se priorizan soluciones que violan las restricciones pero tienen un mejor valor de la función objetivo.
+    \item \textbf{Sensibilidad al parámetro de penalización:} La elección del valor de \( \lambda_P \) es crucial. Si es muy pequeño, las restricciones pueden no cumplirse; si es muy grande, puede dificultar la convergencia.
     \item \textbf{Convergencia:} Puede causar una convergencia lenta o incluso la no convergencia del algoritmo.
 \end{itemize}
