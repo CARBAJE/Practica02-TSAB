@@ -109,3 +109,64 @@ El proceso evolutivo se estructura en ciclos o generaciones.
     \item Se almacena el historial del fitness y de las mejores soluciones.
     \item Esto facilita el an\'alisis del comportamiento del algoritmo y la generaci\'on de visualizaciones.
 \end{itemize}
+
+\section{Penalización Exterior}
+
+Los métodos de penalización son técnicas para manejar restricciones en problemas de optimización. La idea principal es transformar un problema de optimización con restricciones en uno sin restricciones, modificando la función objetivo para penalizar las soluciones que no cumplen con las restricciones. En el método de penalización exterior, esto se logra agregando términos a la función objetivo que aumentan su valor cuando se violan las restricciones. [cite: 45, 46, 47, 48, 49, 50, 51]
+
+La función objetivo modificada, denotada como \( F_P(x) \), se define como:
+
+\[
+F_P(x) = f(x) + \lambda P(x)
+\]
+
+Donde:
+
+\begin{itemize}
+    \item \( f(x) \) es la función objetivo original del problema.
+    \item \( P(x) \) es la función de penalización, que cuantifica la violación de las restricciones.
+    \item \( \lambda_P \) es el parámetro de penalización, que controla la severidad de la penalización.
+\end{itemize}
+
+La función de penalización \( P(x) \) se calcula de la siguiente manera:
+
+\[
+P(x) = \sum_{i=1}^{n} \max(0, g_i(x))^2 + \sum_{j=1}^{m} h_j(x)^2
+\]
+
+Donde:
+
+\begin{itemize}
+    \item \( g_i(x) \) representa la \( i \)-ésima restricción de desigualdad, de la forma \( g_i(x) \leq 0 \).
+    \item \( h_j(x) \) representa la \( j \)-ésima restricción de igualdad, de la forma \( h_j(x) = 0 \).
+\end{itemize}
+
+\subsection*{Funcionamiento de la Penalización Exterior}
+
+\begin{itemize}
+    \item Para las restricciones de desigualdad \( g_i(x) \leq 0 \):
+    \begin{itemize}
+        \item Si la restricción se cumple, \( \max(0, g_i(x)) = 0 \), por lo que no hay penalización.
+        \item Si la restricción se viola, \( \max(0, g_i(x)) = g_i(x) \), y se aplica una penalización proporcional al cuadrado de la violación.
+    \end{itemize}
+    \item Para las restricciones de igualdad \( h_j(x) = 0 \):
+    \begin{itemize}
+        \item Si la restricción se cumple, \( h_j{(x)}^2 = 0 \), y no hay penalización.
+        \item Si la restricción no se cumple, \( h_j{(x)}^2 > 0 \), y se aplica una penalización proporcional al cuadrado de la diferencia.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Ventajas}
+
+\begin{itemize}
+    \item \textbf{Facilidad de implementación:} Es relativamente sencillo agregar la penalización externa a los algoritmos de optimización existentes.
+    \item \textbf{Flexibilidad:} Permite explorar soluciones que violan las restricciones, lo cual puede ser útil en problemas complejos.
+\end{itemize}
+
+\subsection*{Desventajas}
+
+\begin{itemize}
+    \item \textbf{Distorsión de la solución óptima:} La penalización puede llevar a soluciones subóptimas si se priorizan soluciones que violan las restricciones pero tienen un mejor valor de la función objetivo. [cite: 61, 62]
+    \item \textbf{Sensibilidad al parámetro de penalización:} La elección del valor de \( \lambda_P \) es crucial. Si es muy pequeño, las restricciones pueden no cumplirse; si es muy grande, puede dificultar la convergencia. [cite: 63, 64, 65]
+    \item \textbf{Convergencia:} Puede causar una convergencia lenta o incluso la no convergencia del algoritmo.
+\end{itemize}
