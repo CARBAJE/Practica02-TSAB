@@ -2,6 +2,15 @@ import numpy as np
 from PIL import Image
 from scipy.stats import entropy
 
+covarianza = np.array([
+    [0.032, 0.005, 0.03, -0.031, -0.027, 0.01],
+    [0.005, 0.1, 0.085, -0.07, -0.05, 0.02],
+    [0.03, 0.085, 0.333, -0.11, -0.02, 0.042],
+    [-0.031, -0.07, -0.11, 0.125, 0.05, -0.06],
+    [-0.027, -0.05, -0.02, 0.05, 0.065, -0.02],
+    [0.01, 0.02, 0.042, -0.06, -0.02, 0.08]
+])
+
 def ImgRGB2Gray(file):
     """ Convierte una imagen RGB a escala de grises y la normaliza en el rango [0,1] """
     img_rgb = Image.open(file)
@@ -57,8 +66,20 @@ def g1_2(x):
     return 3*x[0] + 4*x[1] - 6
 
 def f_finanzas(x):
-    """Función objetivo para el problema de finanzas"""
+    """Función objetivo para los problemas 1 y 3 de finanzas (maximizar ganancias)"""
     return -((0.2 * x[0]) + (0.42 * x[1]) + (1 * x[2]) + (0.5 * x[3]) + (0.46 * x[4]) + (0.3*x[5]))
 
 def h1_finanzas(x):
     return 1 - np.sum(x)
+
+def f_riesgos(x):
+    """Función objetivo para el segundo problema de finanzas (minimizar riesgos)"""    
+    return x@covarianza@x
+
+def g1_finanzas(x):
+    """Restricción para el problema 2 de finanzas"""
+    return .35-((0.2 * x[0]) + (0.42 * x[1]) + (1 * x[2]) + (0.5 * x[3]) + (0.46 * x[4]) + (0.3*x[5]))
+
+def g2_finanzas(x):
+    """Restricción para el problema 3 de finanzas"""
+    return x@covarianza@x -.1

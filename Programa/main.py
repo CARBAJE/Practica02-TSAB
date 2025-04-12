@@ -4,7 +4,7 @@ from AG_confs import *
 
 from AG import genetic_algorithm
 from libs.plot import *
-from libs.functions import ImgRGB2Gray, apply_sigmoid
+from libs.functions import g1_finanzas
 
 def main():
     # Crear carpetas de salida generales
@@ -44,8 +44,7 @@ def main():
              avg_sol,  avg_val,
              std_val,
              best_fitness_history,
-             best_x1_history,
-             best_x2_history,
+             best_x_history,
              constraint_violations_history,  # Nuevo: recibir historial de violaciones
              population_final,
              fitness_final,
@@ -64,8 +63,7 @@ def main():
             # 1) Guardar historial
             df_historial = pd.DataFrame({
                 "Generacion": np.arange(1, NUM_GENERATIONS + 1),
-                "Mejor alpha": best_x1_history,
-                "Mejor delta": best_x2_history,
+                "Mejor individuo": best_x_history,
                 "Mejor Fitness": best_fitness_history
             })
             # Añadir columna de violaciones si existe
@@ -77,12 +75,14 @@ def main():
             
             # 2) Guardar resumen de la corrida
             data_resumen = [
-                ["Mejor", best_sol[0], best_sol[1], best_val],
-                ["Media", avg_sol[0], avg_sol[1], avg_val],
-                ["Peor", worst_sol[0], worst_sol[1], worst_val],
-                ["Desv. estándar", np.nan, np.nan, std_val]
+                ["Mejor"] + list(best_sol) + [best_val] ,
+                ["Media"] + list(avg_sol) + [avg_val] ,
+                ["Peor"] + list(worst_sol) + [worst_val] 
             ]
-            df_resumen = pd.DataFrame(data_resumen, columns=["Indicador", "x1", "x2", "Fitness"])
+
+            column_names = ["Indicador"] + [f"x{i}" for i in range(len(best_sol))] + ["Fitness"]
+
+            df_resumen = pd.DataFrame(data_resumen, columns=column_names)
             resumen_filename = os.path.join(res_folder, f"resumen_run_{run+1}.csv")
             df_resumen.to_csv(resumen_filename, index=False)
             
@@ -103,14 +103,19 @@ def main():
         # Para el "Mejor" y "Peor", buscamos el índice de la corrida con mínimo y máximo fitness
         min_index = np.argmin(best_values_arr)
         max_index = np.argmax(best_values_arr)
-        
+        num_vars = solutions_arr.shape[1]
+
         data_global = [
-            ["Mejor (Fitness)", solutions_arr[min_index, 0], solutions_arr[min_index, 1], best_values_arr[min_index]],
-            ["Peor (Fitness)", solutions_arr[max_index, 0], solutions_arr[max_index, 1], best_values_arr[max_index]],
-            ["Media", np.mean(solutions_arr[:, 0]), np.mean(solutions_arr[:, 1]), np.mean(best_values_arr)],
-            ["Desv. Estándar", np.std(solutions_arr[:, 0]), np.std(solutions_arr[:, 1]), np.std(best_values_arr)]
+            ["Mejor (Fitness)"] + list(solutions_arr[min_index, :]) + [best_values_arr[min_index]],
+            ["Peor (Fitness)"] + list(solutions_arr[max_index, :]) + [best_values_arr[max_index]],
+            ["Media"] + [np.mean(solutions_arr[:, i]) for i in range(num_vars)] + [np.mean(best_values_arr)],
+            ["Desv. Estándar"] + [np.std(solutions_arr[:, i]) for i in range(num_vars)] + [np.std(best_values_arr)]
         ]
-        df_global = pd.DataFrame(data_global, columns=["Indicador", "alpha", "delta", "Fitness"])
+
+        # Generamos nombres de columnas automáticamente: x0, x1, ..., xN
+        column_names = ["Indicador"] + [f"x{i}" for i in range(num_vars)] + ["Fitness"]
+
+        df_global = pd.DataFrame(data_global, columns=column_names)
         
         global_filename = os.path.join(res_folder, "resumen_global_corridas.csv")
         df_global.to_csv(global_filename, index=False)

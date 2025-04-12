@@ -19,7 +19,7 @@ def genetic_algorithm(objective_func, g, h, lower_bound, upper_bound,
       - worst_solution, worst_value
       - avg_solution, avg_value
       - std_value (fitness)
-      - best_fitness_history, best_x1_history, best_x2_history
+      - best_fitness_history, best_x_history
       - constraint_violations_history 
       - population (final), fitness (final)
       - best_solutions_over_time (para animaciones)
@@ -31,8 +31,7 @@ def genetic_algorithm(objective_func, g, h, lower_bound, upper_bound,
     fitness = np.array(evaluate_individuals_with_constraints(population, objective_func, g, h, lam))
     
     best_fitness_history = []
-    best_x1_history = []
-    best_x2_history = []
+    best_x_history = []
     constraint_violations_history = []  # Nuevo: Historial de violaciones
     
     # Para animación: almacenamos el mejor (x1, x2) en cada generación
@@ -45,8 +44,7 @@ def genetic_algorithm(objective_func, g, h, lower_bound, upper_bound,
         elite = population[best_index].copy()
         
         best_fitness_history.append(best_fitness)
-        best_x1_history.append(elite[2])
-        best_x2_history.append(elite[3])
+        best_x_history.append(elite)
         best_solutions_over_time[gen, :] = elite
         
         # Calcular violaciones de restricciones para el mejor individuo
@@ -121,8 +119,7 @@ def genetic_algorithm(objective_func, g, h, lower_bound, upper_bound,
             avg_solution, avg_value,
             std_value,
             best_fitness_history,
-            best_x1_history,
-            best_x2_history,
+            best_x_history,
             constraint_violations_history,  # Nuevo: historial de violaciones
             population,
             fitness,
