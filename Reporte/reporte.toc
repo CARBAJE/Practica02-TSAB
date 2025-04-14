@@ -1,17 +1,18 @@
 \babel@toc {spanish}{}
 \contentsline {chapter}{\numberline {1}Introducción}{1-1}{chapter.1}%
 \contentsline {chapter}{\numberline {2}Objetivos del Proyecto}{2-1}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Implementar un algoritmo genético robusto}{2-1}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Minimización de funciones benchmark}{2-1}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Visualización y análisis}{2-1}{section.2.3}%
+\contentsline {section}{\numberline {2.1}Objetivo general}{2-1}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Objetivo del inciso uno}{2-1}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Objetivo inciso dos}{2-1}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Objetivo inciso tres}{2-1}{section.2.4}%
 \contentsline {chapter}{\numberline {3}Metodolog\'ia}{3-1}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Inicializaci\'on de la Poblaci\'on}{3-1}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Evaluaci\'on de Fitness}{3-1}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Selecci\'on por Torneo}{3-2}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Cruzamiento con SBX}{3-2}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Mutaci\'on Polinomial}{3-3}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Elitismo y Ciclo Evolutivo}{3-3}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Penalización Exterior}{3-4}{section.3.7}%
+\contentsline {section}{\numberline {3.2}Evaluación de Fitness}{3-1}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Selecci\'on por Torneo}{3-3}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Cruzamiento con SBX}{3-3}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Mutaci\'on Polinomial}{3-4}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Elitismo y Ciclo Evolutivo}{3-4}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Penalización Exterior}{3-5}{section.3.7}%
 \contentsline {chapter}{\numberline {4}Resultados y Discusi\'on}{4-1}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Análisis de los Resultados}{4-2}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Consistencia y Robustez}{4-2}{subsection.4.1.1}%
@@ -30,7 +31,8 @@
 \contentsline {subsection}{\numberline {5.2.2}Selecci\'on}{5-2}{subsection.5.2.2}%
 \contentsline {subsection}{\numberline {5.2.3}Cruzamiento}{5-2}{subsection.5.2.3}%
 \contentsline {subsection}{\numberline {5.2.4}Mutaci\'on}{5-2}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}Ejecuci\'on del Algoritmo}{5-2}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.5}Aplicacion de Restricciones}{5-2}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.6}Ejecuci\'on del Algoritmo}{5-2}{subsection.5.2.6}%
 \contentsline {section}{\numberline {5.3}Visualizaci\'on y Almacenamiento}{5-2}{section.5.3}%
 \contentsline {subsection}{\numberline {5.3.1}Visualizaci\'on}{5-2}{subsection.5.3.1}%
 \contentsline {subsection}{\numberline {5.3.2}Almacenamiento}{5-2}{subsection.5.3.2}%

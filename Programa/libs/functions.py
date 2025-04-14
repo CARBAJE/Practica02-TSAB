@@ -82,4 +82,4 @@ def g1_finanzas(x):
 
 def g2_finanzas(x):
     """Restricción para el problema 3 de finanzas"""
-    return x@covarianza@x -.2
+    return .2 - x@covarianza@x

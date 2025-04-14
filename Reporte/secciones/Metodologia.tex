@@ -15,14 +15,77 @@ Se utiliza la funci\'on \texttt{initialize\_population}, la cual emplea m\'etodo
     \item Aumenta la probabilidad de encontrar regiones prometedoras del espacio de soluciones desde el inicio.
 \end{itemize}
 
-\section{Evaluaci\'on de Fitness}
+\section{Evaluación de Fitness}
 
-Cada individuo generado se eval\'ua mediante la funci\'on objetivo, la cual determina qu\'e tan buena es la soluci\'on propuesta.
+Cada individuo generado se evalúa mediante una función objetivo, la cual cuantifica la calidad de la solución propuesta. A continuación, se describen las funciones objetivo y las restricciones empleadas para cada problema abordado:
 
-\subsection*{Funciones Utilizadas}
+\subsection*{Funciones Utilizadas por Problema}
+
 \begin{itemize}
-    \item \textbf{Langermann}: Es una funci\'on multimodal que combina componentes cosenoidales y exponenciales, generando m\'ultiples \'optimos locales.
-    \item \textbf{Drop-Wave}: Una funci\'on bidimensional con una superficie ondulada, usada para analizar el comportamiento del algoritmo en entornos con m\'ultiples picos y valles.
+    \item \textbf{Problema 1: Optimización de Ganancias}
+    \begin{itemize}
+        \item \textbf{Función Objetivo ($f_{\text{finanzas}}(x)$)}: El objetivo es maximizar las ganancias, calculado como una combinación lineal de las variables de decisión ($x$), ponderadas por los siguientes coeficientes: 0.2, 0.42, 1, 0.5, 0.46 y 0.3 para $x_0$ a $x_5$ respectivamente. Matemáticamente, se expresa como:
+        \[
+        f_{\text{finanzas}}(x) = -(0.2x_0 + 0.42x_1 + 1x_2 + 0.5x_3 + 0.46x_4 + 0.3x_5)
+        \]
+        El signo negativo indica que, aunque la función se define para minimizar, en este contexto buscamos maximizar las ganancias, por lo que el algoritmo de optimización buscará minimizar el negativo de esta función.
+
+        \item \textbf{Restricción de Igualdad ($h_1(x)$)}: Se impone una restricción de igualdad que requiere que la suma de todas las variables de decisión sea igual a 1:
+        \[
+        h_1(x) = 1 - \sum_{i=0}^{5} x_i = 0
+        \]
+
+        \item \textbf{Función Secundaria Monitoreada ($f_{\text{riesgos}}(x)$)}: Adicionalmente, se monitorea la función de riesgos, aunque no se utiliza directamente en la evaluación de fitness para este problema. Esta función se calcula como:
+        \[
+        f_{\text{riesgos}}(x) = x^T \Sigma x
+        \]
+        donde $\Sigma$ representa la matriz de covarianza de los activos.
+    \end{itemize}
+
+    \item \textbf{Problema 2: Minimización de Riesgos}
+    \begin{itemize}
+        \item \textbf{Función Objetivo ($f_{\text{riesgos}}(x)$)}: El objetivo principal es minimizar el riesgo, calculado mediante la siguiente función cuadrática:
+        \[
+        f_{\text{riesgos}}(x) = x^T \Sigma x
+        \]
+        donde $\Sigma$ es la matriz de covarianza de los activos y $x$ es el vector de las variables de decisión.
+
+        \item \textbf{Restricción de Desigualdad ($g_1(x)$)}: Se establece una restricción de desigualdad que limita la ganancia mínima aceptable:
+        \[
+        g_1(x) = 0.35 + f_{\text{finanzas}}(x) \leq 0
+        \]
+        donde
+        \[
+        f_{\text{finanzas}}(x) = -(0.2x_0 + 0.42x_1 + 1x_2 + 0.5x_3 + 0.46x_4 + 0.3x_5)
+        \]
+
+        \item \textbf{Restricción de Igualdad ($h_1(x)$)}: Al igual que en el Problema 1, se aplica la restricción de igualdad:
+        \[
+        h_1(x) = 1 - \sum_{i=0}^{5} x_i = 0
+        \]
+
+        \item \textbf{Función Secundaria Monitoreada ($f_{\text{finanzas}}(x)$)}: Se realiza un seguimiento de la función de ganancias para este problema, aunque no influye directamente en la optimización del riesgo.
+    \end{itemize}
+
+    \item \textbf{Problema 3: Optimización de Ganancias con Restricción de Riesgo}
+    \begin{itemize}
+        \item \textbf{Función Objetivo ($f_{\text{finanzas}}(x)$)}: Similar al Problema 1, el objetivo es maximizar las ganancias:
+        \[
+        f_{\text{finanzas}}(x) = -(0.2x_0 + 0.42x_1 + 1x_2 + 0.5x_3 + 0.46x_4 + 0.3x_5)
+        \]
+
+        \item \textbf{Restricción de Desigualdad ($g_2(x)$)}: Se introduce una restricción de desigualdad que establece un límite superior para el riesgo:
+        \[
+        g_2(x) = 0.2 - x^T \Sigma x \leq 0
+        \]
+
+        \item \textbf{Restricción de Igualdad ($h_1(x)$)}: Se mantiene la restricción de que la suma de las variables de decisión debe ser igual a 1:
+        \[
+        h_1(x) = 1 - \sum_{i=0}^{5} x_i = 0
+        \]
+
+        \item \textbf{Función Secundaria Monitoreada ($f_{\text{riesgos}}(x)$)}: Se observa la función de riesgos como una métrica secundaria para este problema.
+    \end{itemize}
 \end{itemize}
 
 \subsection*{Proceso}
