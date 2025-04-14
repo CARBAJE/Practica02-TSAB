@@ -19,7 +19,7 @@ def ImgRGB2Gray(file):
     # Convertir a numpy array y normalizar
     img_rgb = np.array(img_rgb, dtype=np.float64) / 255.0
     img_gray_norm = np.array(img_gray, dtype=np.float64) / 255.0
-    
+
     return img_rgb, img_gray_norm
 
 def sigmoid_transformation(x, alpha, delta):
@@ -30,11 +30,11 @@ def sigmoid_transformation(x, alpha, delta):
 def apply_sigmoid(img, alpha, delta):
     """ Aplica la transformación sigmoide y normaliza la imagen en [0,1] """
     img_with_contrast = sigmoid_transformation(img, alpha, delta)
-    
+
     min_val, max_val = np.min(img_with_contrast), np.max(img_with_contrast)
     if max_val == min_val:  # Evita división por cero
         return np.zeros_like(img_with_contrast, dtype=np.float64)
-    
+
     return (img_with_contrast - min_val) / (max_val - min_val)
 
 def std_img(img, X):
@@ -50,7 +50,7 @@ def Entropy(img, X):
 
     hist, _ = np.histogram(img_new, bins=256, range=(0, 1), density=True)
     #hist = hist[hist > 0]  # Evita valores cero en el logaritmo
-    
+
     return - entropy(hist, base=2) if hist.sum() > 0 else 0  # Evita NaN si histograma está vacío
 
 def f1(x):
@@ -73,13 +73,13 @@ def h1_finanzas(x):
     return 1 - np.sum(x)
 
 def f_riesgos(x):
-    """Función objetivo para el segundo problema de finanzas (minimizar riesgos)"""    
+    """Función objetivo para el segundo problema de finanzas (minimizar riesgos)"""
     return x@covarianza@x
 
 def g1_finanzas(x):
     """Restricción para el problema 2 de finanzas"""
-    return .35-((0.2 * x[0]) + (0.42 * x[1]) + (1 * x[2]) + (0.5 * x[3]) + (0.46 * x[4]) + (0.3*x[5]))
+    return .35 + f_finanzas(x)
 
 def g2_finanzas(x):
     """Restricción para el problema 3 de finanzas"""
-    return x@covarianza@x -.1
+    return x@covarianza@x -.2
