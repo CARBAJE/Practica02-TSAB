@@ -7,12 +7,14 @@ El proyecto se ha desarrollado siguiendo una arquitectura modular\footnote{Se pu
 \subsection{Descripci\'on}
 Las funciones objetivo definen el problema a optimizar. En este proyecto se incluyen dos funciones:
 \begin{itemize}
-    \item \textbf{Langermann}: Una funci\'on multimodal que combina componentes cosenoidales y exponenciales, generando m\'ultiples \'optimos locales.
-    \item \textbf{Drop-Wave}: Una funci\'on bidimensional con una superficie ondulada, ideal para evaluar el desempe\~no del algoritmo en entornos con picos y valles.
+    \item \textbf{Tasa de retorno del portafolio}: Una funci\'on que nos permite calcular la ganancia esperada de un portafolio de inversion considerando las ganancias individuales de cada instrumento.
+    \item \textbf{Varianza del portafolio}: Una funci\'on que nos permite calcular el riesgo de un portafolio de inversion considerando la covarianza de nuestros instrumentos de inversion.
 \end{itemize}
 
 \subsection{Implementaci\'on}
-Estas funciones se encuentran en el archivo \texttt{functions.py} y est\'an parametrizadas con sus respectivos l\'imites de b\'usqueda (por ejemplo, Langermann se define en el intervalo [0,10] para cada variable, mientras que Drop-Wave utiliza los l\'imites [-5.12, 5.12]).
+Se abordaron tres problemas de inversión, cada uno con sus respectivas limitaciones. En los tres casos se establecieron límites para todos los instrumentos de inversión en el intervalo \([0, 10]\). 
+
+En el primer problema, se buscó maximizar el beneficio del portafolio, es decir, maximizar la tasa de retorno. En el segundo problema, el objetivo fue minimizar la varianza del portafolio, manteniendo una ganancia mínima del \(35\%\); por lo tanto, se incorporó esta restricción al modelo. Finalmente, en el tercer problema se volvió a buscar la maximización de la tasa de retorno del portafolio, pero añadiendo la restricción de considerar un riesgo menor al \(20\%\).
 
 \section{M\'odulos del Algoritmo Gen\'etico}
 
@@ -38,6 +40,11 @@ El n\'ucleo del algoritmo gen\'etico se distribuye en varios m\'odulos:
 \textbf{Ubicaci\'on}: \texttt{libs/mutation.py}  
 \textbf{Descripci\'on}: Aplica mutaci\'on polinomial, con control opcional de l\'imites para mantener la viabilidad de las soluciones.
 
+\subsection{Aplicacion de Restricciones}
+\textbf{Función}: \texttt{evaluate\_individuals\_with\_constraints} 
+\textbf{Ubicaci\'on}: \texttt{libs/auxiliaries\_functions.py}  
+\textbf{Descripción}: Verifica el cumplimiento de las restricciones impuestas por el problema. Cuando se violan restricciones, se aplica un mecanismo de penalización para ajustar el valor del fitness, de modo que las soluciones inviables tengan menor probabilidad de ser seleccionadas.
+
 \subsection{Ejecuci\'on del Algoritmo}
 \textbf{Funci\'on}: \texttt{genetic\_algorithm}  
 \textbf{Ubicaci\'on}: \texttt{AG.py}  
@@ -53,7 +60,7 @@ El n\'ucleo del algoritmo gen\'etico se distribuye en varios m\'odulos:
 \subsection{Almacenamiento}
 \textbf{Estructura de Carpetas}:
 \begin{itemize}
-    \item Directorio \texttt{outputs} organizado en subcarpetas por funci\'on.
+    \item Directorio \texttt{outputs} organizado en subcarpetas por problema.
     \item Historiales en archivos CSV con datos de fitness y variables.
     \item Res\'umenes estad\'isticos de cada corrida.
 \end{itemize}
