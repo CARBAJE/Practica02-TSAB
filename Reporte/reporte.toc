@@ -13,13 +13,16 @@
 \contentsline {section}{\numberline {3.5}Mutaci\'on Polinomial}{3-4}{section.3.5}%
 \contentsline {section}{\numberline {3.6}Elitismo y Ciclo Evolutivo}{3-4}{section.3.6}%
 \contentsline {section}{\numberline {3.7}Penalización Exterior}{3-5}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Configuración de Hiperparámetros}{3-6}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Lista de Hiperparámetros}{3-6}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.8.2}Criterios de Selección}{3-7}{subsection.3.8.2}%
 \contentsline {chapter}{\numberline {4}Resultados y Discusi\'on}{4-1}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Análisis de los Resultados}{4-2}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Consistencia y Robustez}{4-2}{subsection.4.1.1}%
 \contentsline {subsection}{\numberline {4.1.2}Análisis por Problema}{4-2}{subsection.4.1.2}%
-\contentsline {subsubsection}{Problema 1: Maximización de Retorno}{4-2}{subsubsection*.1}%
-\contentsline {subsubsection}{Problema 2: Minimización de Riesgo}{4-2}{subsubsection*.2}%
-\contentsline {subsubsection}{Problema 3: Maximización de Retorno con Riesgo Controlado}{4-2}{subsubsection*.3}%
+\contentsline {subsubsection}{Problema 1: Maximización de Retorno}{4-2}{subsubsection*.2}%
+\contentsline {subsubsection}{Problema 2: Minimización de Riesgo}{4-2}{subsubsection*.3}%
+\contentsline {subsubsection}{Problema 3: Maximización de Retorno con Riesgo Controlado}{4-2}{subsubsection*.4}%
 \contentsline {subsection}{\numberline {4.1.3}Evolución del Fitness y Visualizaciones}{4-2}{subsection.4.1.3}%
 \contentsline {section}{\numberline {4.2}Discusión Resultados}{4-4}{section.4.2}%
 \contentsline {chapter}{\numberline {5}Implementaci\'on}{5-1}{chapter.5}%

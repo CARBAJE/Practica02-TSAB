@@ -233,3 +233,41 @@ Donde:
     \item \textbf{Sensibilidad al parámetro de penalización:} La elección del valor de \( \lambda_P \) es crucial. Si es muy pequeño, las restricciones pueden no cumplirse; si es muy grande, puede dificultar la convergencia.
     \item \textbf{Convergencia:} Puede causar una convergencia lenta o incluso la no convergencia del algoritmo.
 \end{itemize}
+
+\section{Configuración de Hiperparámetros}
+En este apartado se detallan los valores de los principales hiperparámetros del algoritmo evolutivo, así como la razón de diseño detrás de cada uno.
+
+\subsection{Lista de Hiperparámetros}
+
+\begin{table}[H]
+\centering
+\caption{Hiperparámetros utilizados y su justificación}
+\begin{tabular}{llp{8cm}}
+\toprule
+\textbf{Hiperparámetro} & \textbf{Valor} & \textbf{Justificación} \\
+\midrule
+\texttt{POP\_SIZE}           & 1100                & Tamaño amplio que garantiza diversidad y buena cobertura del espacio de búsqueda. \\
+\texttt{NUM\_GENERATIONS}    & 1500                & Número de iteraciones suficiente para converger sin excesivo costo computacional. \\
+\texttt{NUM\_RUNS}           & 5                   & Varias ejecuciones independientes para evaluar robustez y consistencia de resultados. \\
+\texttt{TOURNAMENT\_SIZE}     & 3                   & Presión selectiva moderada, evitando convergencia prematura y manteniendo diversidad. \\
+\texttt{CROSSOVER\_PROB}      & 0.9                 & Alta frecuencia de recombinación para explorar combinaciones de genes de padres. \\
+\texttt{ETA\_C}               & 0.001               & Índice de distribución bajo en SBX para generar descendientes cercanos (explotación fina). \\
+\texttt{MUTATION\_PROB}       & $1/10$              & Probabilidad de mutar cada gen que introduce variabilidad controlada. \\
+\texttt{ETA\_MUT}             & 0.0001              & Índice de distribución bajo en mutación polinomial para pequeños ajustes locales. \\
+\texttt{LB}, \texttt{UB}      & [0.0,\,0.4]         & Límites de búsqueda basados en proporciones factibles de asignación de recursos. \\
+\texttt{LAMBDA}               & $1\times10^2$       & Coeficiente de penalización equilibrado para manejar violaciones de restricciones. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\subsection{Criterios de Selección}
+La elección de estos valores se fundamenta en:
+
+\begin{itemize}
+  \item \textbf{Diversidad vs. Convergencia:} Un \texttt{POP\_SIZE} elevado y un \texttt{TOURNAMENT\_SIZE} moderado mantienen un buen equilibrio entre exploración y explotación.
+  \item \textbf{Profundidad de Búsqueda:} Un número alto de generaciones (\texttt{NUM\_GENERATIONS}) permite que la población evolucione lo suficiente para afinar soluciones.
+  \item \textbf{Variabilidad Controlada:} Altas probabilidades de cruzamiento (\texttt{CROSSOVER\_PROB}) y tasas de mutación moderadas (\texttt{MUTATION\_PROB}, \texttt{ETA\_MUT}) aseguran exploración sin destruir buenas soluciones.
+  \item \textbf{Manejo de Restricciones:} El coeficiente de penalización (\texttt{LAMBDA}) se calibró para penalizar con fuerza las violaciones sin bloquear la búsqueda en zonas viables.
+\end{itemize}

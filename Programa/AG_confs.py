@@ -36,6 +36,26 @@ all_runs_history = []  # Para graficar luego
 LAMBDA = 1*10e1
 
 FUNCTIONS = {
+    "Problem1": {
+        "func": f_finanzas,
+        "g": None,
+        "h": [h1_finanzas],
+        "lb": LB,
+        "ub": UB,
+        "name": "Problema 1",
+        "num_runs": NUM_RUNS,
+        "secondary_func": f_riesgos  # Función secundaria que queremos monitorear
+    },
+    "Problem2": {
+        "func": f_riesgos,
+        "g": [g1_finanzas],
+        "h": [h1_finanzas],
+        "lb": LB,
+        "ub": UB,
+        "name": "Problema 2",
+        "num_runs": NUM_RUNS,
+        "secondary_func": f_finanzas  # Función secundaria que queremos monitorear
+    },
     "Problem3": {
         "func": f_finanzas,
         "g": [g2_finanzas],
